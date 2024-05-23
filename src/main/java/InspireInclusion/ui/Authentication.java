@@ -1,7 +1,7 @@
 package InspireInclusion.ui;
 
 import InspireInclusion.Platform;
-import javafx.application.Application;
+import java.util.HashMap;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -21,39 +20,63 @@ public class Authentication {
     private static final Platform platform = new Platform();
     //Change default strings later to use a
     //hashmap data structure to map the usernames to passwords
+    private static final HashMap<String, String> userCredentials = new HashMap<>();
     private static final String DEFAULT_USERNAME = "admin";
     private static final String DEFAULT_PASSWORD = "12345678";
     public static boolean authentication_status;
+    static {
+        userCredentials.put("admin", "12345678");
+    }
+
+    private static void addUserCredentials(String username, String password) {
+        userCredentials.put(username, password);
+    }
+
+    private static boolean authenticate(String username, String password) {
+        return userCredentials.containsKey(username) && userCredentials.get(username).equals(password);
+    }
 
     public static void start(Stage stage) {
         stage.setTitle("Login Page");
         Label username = new Label("Username: ");
         Label password = new Label("Password: ");
         Label authentication = new Label();
+        Label registration = new Label();
         TextField usernameField = new TextField();
         PasswordField passwordField = new PasswordField();
         Button login = new Button("Login");
+        Button signup = new Button("Signup");
+        signup.setOnAction(event -> {
+            String enteredUsername = usernameField.getText();
+            String enteredPassword = passwordField.getText();
+            if (userCredentials.containsKey(enteredUsername)) {
+                registration.setText("Username already exists!");
+            } else {
+                addUserCredentials(enteredUsername, enteredPassword);
+                registration.setText("Sign up successful! Proceed to log in!");
+            }
+        });
         login.setOnAction(event -> {
             String enteredUsername = usernameField.getText();
             String enteredPassword = passwordField.getText();
-
-            if (enteredUsername.equals(DEFAULT_USERNAME) && enteredPassword.equals(DEFAULT_PASSWORD)) {
+            if (authenticate(enteredUsername, enteredPassword)) {
                 authentication.setText("Login successful!");
                 authentication_status = true;
                 openMainWindow(stage);
-            } else {
+            } else if (userCredentials.containsKey(enteredUsername)) {
                 authentication.setText("Login failed. Please check your credentials.");
+                authentication_status = false;
+            } else {
+                authentication.setText("Username does not exist. Please sign up.");
                 authentication_status = false;
             }
         });
         VBox root = new VBox(10);
-        root.getChildren().addAll(username, usernameField, password, passwordField, login, authentication);
+        root.getChildren().addAll(username, usernameField, password, passwordField, login, authentication,
+                signup, registration);
 
-        // Create the scene and set it in the stage.
-        Scene scene = new Scene(root, 300, 200);
+        Scene scene = new Scene(root, 300, 230);
         stage.setScene(scene);
-
-        // Show the window.
         stage.show();
     }
     private static void openMainWindow(Stage stage) {
