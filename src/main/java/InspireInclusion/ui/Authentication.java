@@ -2,6 +2,8 @@ package InspireInclusion.ui;
 
 import InspireInclusion.Platform;
 import java.util.HashMap;
+
+import InspireInclusion.Storage;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -20,16 +22,25 @@ public class Authentication {
     private static final Platform platform = new Platform();
     //Change default strings later to use a
     //hashmap data structure to map the usernames to passwords
-    private static final HashMap<String, String> userCredentials = new HashMap<>();
+    private static HashMap<String, String> userCredentials = new HashMap<>();
     private static final String DEFAULT_USERNAME = "admin";
     private static final String DEFAULT_PASSWORD = "12345678";
     public static boolean authentication_status;
     static {
-        userCredentials.put("admin", "12345678");
+        try {
+            userCredentials = Storage.loadCredentials();
+        } catch (IOException | ClassNotFoundException e) {
+            userCredentials.put("admin", "12345678");
+        }
     }
 
     private static void addUserCredentials(String username, String password) {
         userCredentials.put(username, password);
+        try {
+            Storage.saveCredentials(userCredentials);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private static boolean authenticate(String username, String password) {
