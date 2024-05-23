@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 /**
  * The Storage class is responsible for reading and writing tasklists
- * to and from the Duke.txt file.
+ * to and from the userCredentials.txt file.
  */
 public class Storage{
     private static final String PASSWORD_FILE = "userCredentials.txt";

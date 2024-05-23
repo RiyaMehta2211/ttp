@@ -21,6 +21,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Platform platform;
+    private Image defaultImage = new Image(this.getClass().getResourceAsStream("/images/defaultImage.png"));
 
 
     //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/profileImage.png"));
@@ -31,6 +32,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getPlatformDialog(Ui.printWelcome(), defaultImage)
+        );
     }
 
     public void setPlatform(Platform p) {

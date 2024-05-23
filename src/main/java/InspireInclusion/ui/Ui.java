@@ -9,6 +9,6 @@ public class Ui {
      * @return A welcome message to be shown to the user.
      */
     public static String printWelcome() {
-        return "Welcome to InspireInclusion!";
+        return "Welcome to InspireInclusion! Inspire inclusion and engage communities!";
     }
 }
