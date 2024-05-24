@@ -10,7 +10,7 @@
          maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true"
-               style = "-fx-background-radius: 10; -fx-background-color: rgba(0, 0, 128, 0.75); -fx-border-radius: 8; -fx-border-color:#FFBF00; -fx-border-width: 3.0px" textFill="gold">
+               style = "-fx-background-radius: 10; -fx-background-color: rgba(0, 0, 128, 0.7); -fx-border-radius: 8; -fx-border-color:#FFBF00; -fx-border-width: 3.0px" textFill="gold">
             <font>
                 <Font name = "Times New Roman" size = "14"/>
             </font>

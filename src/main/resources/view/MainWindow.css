@@ -1,5 +1,5 @@
 .scrollPane .viewport{
     -fx-background-image: url("https://images.photowall.com/products/60854/colorful-abstract-painting.jpg?h=699&q=85");
+    -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
-    -fx-background-size: cover;
 }

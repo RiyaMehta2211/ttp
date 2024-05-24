@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import InspireInclusion.Storage;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,7 +31,7 @@ public class Authentication {
         try {
             userCredentials = Storage.loadCredentials();
         } catch (IOException | ClassNotFoundException e) {
-            userCredentials.put("admin", "12345678");
+            userCredentials.put(DEFAULT_USERNAME, DEFAULT_PASSWORD);
         }
     }
 
@@ -83,6 +84,7 @@ public class Authentication {
             }
         });
         VBox root = new VBox(10);
+        root.setPadding(new Insets(0, 10, 0, 10));
         root.getChildren().addAll(username, usernameField, password, passwordField, login, authentication,
                 signup, registration);
 
