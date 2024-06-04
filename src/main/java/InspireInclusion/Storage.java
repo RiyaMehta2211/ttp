@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.HashMap;
 
 /**
- * The Storage class is responsible for reading and writing tasklists
+ * The Storage class is responsible for reading and writing credentials
  * to and from the userCredentials.txt file.
  */
 public class Storage{

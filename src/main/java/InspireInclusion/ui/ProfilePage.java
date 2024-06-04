@@ -1,4 +1,5 @@
 package InspireInclusion.ui;
+import InspireInclusion.Profile;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -11,17 +12,17 @@ import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Objects;
 
-
 public class ProfilePage {
+    private static final String PROFILE_DETAILS = "profile.dat";
     private ImageView profileImageView;
     private File chosenFile;
     Label profileSaved = new Label();
     private final Image defaultImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/defaultImage.png")));
+    TextField nameField = new TextField();
+    TextField emailField = new TextField();
 
     public void start(Stage stage) {
         stage.setTitle("User Profile");
@@ -30,21 +31,21 @@ public class ProfilePage {
         profileImageView.setFitWidth(150);
         profileImageView.setFitHeight(150);
         profileImageView.setPreserveRatio(true);
-        profileImageView.setImage(defaultImage); //to handle the case of no profile image in the beginning
 
         Button uploadButton = new Button("Upload Profile Picture");
         uploadButton.setOnAction(e -> chooseFile(stage));
 
-        TextField nameField = new TextField();
         nameField.setPromptText("Enter your name");
         Label name = new Label("Name: ");
 
-        TextField emailField = new TextField();
         emailField.setPromptText("Enter your email");
         Label email = new Label("Email: ");
 
+        String filePath = chosenFile != null ? chosenFile.getAbsolutePath() : null;
+
         Button saveButton = new Button("Save Profile");
-        saveButton.setOnAction(e -> saveProfile(nameField.getText(), emailField.getText()));
+        saveButton.setOnAction(e -> saveProfile(nameField.getText(), emailField.getText(),
+               filePath));
 
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
@@ -63,6 +64,8 @@ public class ProfilePage {
         Scene scene = new Scene(gridPane, 400, 300);
         stage.setScene(scene);
         stage.show();
+
+        loadProfile();
     }
 
     private void chooseFile(Stage stage) {
@@ -81,13 +84,22 @@ public class ProfilePage {
         }
     }
 
-    private void saveProfile(String name, String email) {
-        if (chosenFile != null && !name.isEmpty() && !email.isEmpty()) {
+    private void saveProfile(String name, String email, String path){
+        if (!name.isEmpty() && !email.isEmpty()) {
             //sufficient to ensure that the name field is not empty
             if (isValidEmail(email)) {
-                profileSaved.setTextFill(Color.GREEN);
-                profileSaved.setText("Profile saved: " + name);
-                System.out.println("Profile picture path: " + chosenFile.getAbsolutePath());
+                Profile profile = new Profile(name, email, path);
+                try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(PROFILE_DETAILS))) {
+                    file.writeObject(profile);
+                    profileSaved.setTextFill(Color.GREEN);
+                    profileSaved.setText("Profile saved: " + name);
+                    System.out.println("Profile picture path: " + chosenFile.getAbsolutePath());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    profileSaved.setTextFill(Color.RED);
+                    profileSaved.setText("Error saving profile");
+                    throw new RuntimeException(e);
+                }
             }
             if (!isValidEmail(email)) {
                 profileSaved.setTextFill(Color.RED);
@@ -98,6 +110,33 @@ public class ProfilePage {
             profileSaved.setText("Please complete all the fields");
         }
     }
+
+    private void loadProfile() {
+        try (ObjectInputStream file = new ObjectInputStream(new FileInputStream(PROFILE_DETAILS))) {
+            Profile profile = (Profile) file.readObject();
+            nameField.setText(profile.getName());
+            emailField.setText(profile.getEmail());
+            if (profile.getProfileImagePath() != null) {
+                File image_file = new File(profile.getProfileImagePath());
+                Image image = new Image(new FileInputStream(image_file));
+                profileImageView.setImage(image);
+            } else {
+                profileImageView.setImage(defaultImage);
+            }
+
+            profileSaved.setTextFill(Color.GREEN);
+            profileSaved.setText("Profile loaded: " + profile.getName());
+        } catch (FileNotFoundException e) {
+            e.getMessage();
+            profileSaved.setTextFill(Color.RED);
+            profileSaved.setText("No saved profile found");
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            profileSaved.setTextFill(Color.RED);
+            profileSaved.setText("Error loading profile");
+        }
+    }
+
     private boolean isValidEmail(String email) {
         return email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
     }
