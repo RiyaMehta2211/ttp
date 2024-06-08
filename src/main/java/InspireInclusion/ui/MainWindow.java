@@ -10,7 +10,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.util.Objects;
 
 /**
@@ -42,11 +42,33 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     public void initialize() {
-        profileImageView.setImage(userImage);
+        String imagePath = readPath();
+        if (imagePath != null) {
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                Image image = new Image(imageFile.toURI().toString());
+                profileImageView.setImage(image);
+            }
+            else {
+                profileImageView.setImage(userImage);
+            }
+        } else {
+            profileImageView.setImage(userImage);
+        }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getPlatformDialog(Ui.printWelcome(), defaultImage)
         );
+    }
+
+    public String readPath() {
+        String IMAGE_FILE = "path.txt";
+        String path = "";
+        try (ObjectInputStream file = new ObjectInputStream(new FileInputStream(IMAGE_FILE))) {
+            path = (String) file.readObject();
+        } catch (IOException|ClassNotFoundException e) {
+            e.getMessage();
+        } return path;
     }
 
     public void setPlatform(Platform p) {

@@ -90,7 +90,12 @@ public class ProfilePage {
                     path = getClass().getResource("/images/defaultImage.png").toExternalForm();
                 }
                 Profile profile = new Profile(name, email, path);
-
+                String IMAGE_FILE = "path.txt";
+                try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(IMAGE_FILE))) {
+                    file.writeObject(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(PROFILE_DETAILS))) {
                     file.writeObject(profile);
                     profileSaved.setTextFill(Color.GREEN);
