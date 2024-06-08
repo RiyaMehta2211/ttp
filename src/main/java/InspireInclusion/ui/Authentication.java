@@ -84,11 +84,11 @@ public class Authentication {
             }
         });
         VBox root = new VBox(10);
-        root.setPadding(new Insets(0, 10, 0, 10));
+        root.setPadding(new Insets(10, 10, 10, 10));
         root.getChildren().addAll(username, usernameField, password, passwordField, login, authentication,
                 signup, registration);
 
-        Scene scene = new Scene(root, 300, 230);
+        Scene scene = new Scene(root, 300, 250);
         stage.setScene(scene);
         stage.show();
     }

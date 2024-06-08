@@ -31,6 +31,7 @@ public class ProfilePage {
         profileImageView.setFitWidth(150);
         profileImageView.setFitHeight(150);
         profileImageView.setPreserveRatio(true);
+        profileImageView.setImage(defaultImage);  // Set default image initially
 
         Button uploadButton = new Button("Upload Profile Picture");
         uploadButton.setOnAction(e -> chooseFile(stage));
@@ -41,11 +42,9 @@ public class ProfilePage {
         emailField.setPromptText("Enter your email");
         Label email = new Label("Email: ");
 
-        String filePath = chosenFile != null ? chosenFile.getAbsolutePath() : null;
-
         Button saveButton = new Button("Save Profile");
         saveButton.setOnAction(e -> saveProfile(nameField.getText(), emailField.getText(),
-               filePath));
+                chosenFile != null ? chosenFile.getAbsolutePath() : null));
 
         GridPane gridPane = new GridPane();
         gridPane.setVgap(10);
@@ -86,22 +85,24 @@ public class ProfilePage {
 
     private void saveProfile(String name, String email, String path){
         if (!name.isEmpty() && !email.isEmpty()) {
-            //sufficient to ensure that the name field is not empty
             if (isValidEmail(email)) {
+                if (path == null) {
+                    path = getClass().getResource("/images/defaultImage.png").toExternalForm();
+                }
                 Profile profile = new Profile(name, email, path);
+
                 try (ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(PROFILE_DETAILS))) {
                     file.writeObject(profile);
                     profileSaved.setTextFill(Color.GREEN);
                     profileSaved.setText("Profile saved: " + name);
-                    System.out.println("Profile picture path: " + chosenFile.getAbsolutePath());
+                    System.out.println("Profile picture path: " + path);
                 } catch (IOException e) {
                     e.printStackTrace();
                     profileSaved.setTextFill(Color.RED);
                     profileSaved.setText("Error saving profile");
                     throw new RuntimeException(e);
                 }
-            }
-            if (!isValidEmail(email)) {
+            } else {
                 profileSaved.setTextFill(Color.RED);
                 profileSaved.setText("Please enter valid email");
             }
@@ -116,9 +117,10 @@ public class ProfilePage {
             Profile profile = (Profile) file.readObject();
             nameField.setText(profile.getName());
             emailField.setText(profile.getEmail());
-            if (profile.getProfileImagePath() != null) {
-                File image_file = new File(profile.getProfileImagePath());
-                Image image = new Image(new FileInputStream(image_file));
+
+            String profileImagePath = profile.getProfileImagePath();
+            if (profileImagePath != null && new File(profileImagePath).exists()) {
+                Image image = new Image(new FileInputStream(profileImagePath));
                 profileImageView.setImage(image);
             } else {
                 profileImageView.setImage(defaultImage);
@@ -127,7 +129,7 @@ public class ProfilePage {
             profileSaved.setTextFill(Color.GREEN);
             profileSaved.setText("Profile loaded: " + profile.getName());
         } catch (FileNotFoundException e) {
-            e.getMessage();
+            e.printStackTrace();
             profileSaved.setTextFill(Color.RED);
             profileSaved.setText("No saved profile found");
         } catch (IOException | ClassNotFoundException e) {
@@ -136,7 +138,6 @@ public class ProfilePage {
             profileSaved.setText("Error loading profile");
         }
     }
-
     private boolean isValidEmail(String email) {
         return email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
     }
