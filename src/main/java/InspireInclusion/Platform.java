@@ -24,5 +24,8 @@ public class Platform{
         Platform platform = new Platform();
         platform.platformInteraction();
     }
+    public String getResponse(String input) {
+        return Ui.printResponse(input);
+    }
 }
 

@@ -11,4 +11,7 @@ public class Ui {
     public static String printWelcome() {
         return "Welcome to InspireInclusion! Inspire inclusion and engage communities!";
     }
+    public static String printResponse(String input) {
+        return input;
+    }
 }

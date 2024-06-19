@@ -130,7 +130,6 @@ public class ProfilePage {
             } else {
                 profileImageView.setImage(defaultImage);
             }
-
             profileSaved.setTextFill(Color.GREEN);
             profileSaved.setText("Profile loaded: " + profile.getName());
         } catch (FileNotFoundException e) {
@@ -146,5 +145,4 @@ public class ProfilePage {
     private boolean isValidEmail(String email) {
         return email.matches("^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$");
     }
-
 }
