@@ -25,7 +25,7 @@ public class Platform{
         platform.platformInteraction();
     }
     public String getResponse(String input) {
-        return Ui.printResponse(input);
+        return Parser.chat(input);
     }
 }
 
