@@ -17,6 +17,7 @@ import java.util.Objects;
 
 public class ProfilePage {
     private static final String PROFILE_DETAILS = "profile.dat";
+    public static boolean profilePictureUpdated = false;
     private ImageView profileImageView;
     private File chosenFile;
     Label profileSaved = new Label();
@@ -101,6 +102,7 @@ public class ProfilePage {
                     profileSaved.setTextFill(Color.GREEN);
                     profileSaved.setText("Profile saved: " + name);
                     System.out.println("Profile picture path: " + path);
+                    profilePictureUpdated = true;
                 } catch (IOException e) {
                     e.printStackTrace();
                     profileSaved.setTextFill(Color.RED);

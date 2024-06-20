@@ -1,6 +1,5 @@
 package InspireInclusion.ui;
 import InspireInclusion.Platform;
-import InspireInclusion.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -35,8 +34,6 @@ public class MainWindow extends AnchorPane {
     private Platform platform;
     private final Image defaultImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/defaultImage.png")));
     private final Image defaultUserImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/userImage.png")));
-    //To be added later with the rest of the profile set up
-    //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/profileImage.png"));
     /**
      * Initializes the JavaFX controller when the associated FXML file is loaded.
      * This method sets up the scroll pane and adds the initial dialog to the dialog container.
@@ -81,6 +78,23 @@ public class MainWindow extends AnchorPane {
             Stage profileStage = new Stage();
             ProfilePage userProfilePage = new ProfilePage();
             userProfilePage.start(profileStage);
+            profileStage.setOnHiding(event -> {
+                if (ProfilePage.profilePictureUpdated) {
+                    String imagePath = readPath();
+                    if (imagePath != null) {
+                        File imageFile = new File(imagePath);
+                        if (imageFile.exists()) {
+                            Image image = new Image(imageFile.toURI().toString());
+                            profileImageView.setImage(image);
+                        } else {
+                            profileImageView.setImage(defaultUserImage);
+                        }
+                    } else {
+                        profileImageView.setImage(defaultUserImage);
+                    }
+                    ProfilePage.profilePictureUpdated = false;
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
