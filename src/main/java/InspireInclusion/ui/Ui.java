@@ -23,11 +23,11 @@ public class Ui {
                 + "3. find <keyword>: returns a new list of tasks containing the matching keyword in the task description\n"
                 + "4. bye: displays a goodbye message. \n" +
                 "Start setting up your profile on the app if you haven't already!" +
-                "Click on the top right corner to begin!";
+                " Click on the top right corner to begin!";
     }
 
     public static String printError() {
-        return "Sorry friend, I don't know what this means :( Type help to find out more" +
+        return "Sorry friend, I don't know what this means :( Type help to find out more " +
                 "about the app!";
     }
 

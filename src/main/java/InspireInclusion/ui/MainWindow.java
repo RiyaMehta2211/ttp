@@ -1,5 +1,6 @@
 package InspireInclusion.ui;
 import InspireInclusion.Platform;
+import InspireInclusion.Profile;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -33,7 +34,7 @@ public class MainWindow extends AnchorPane {
 
     private Platform platform;
     private final Image defaultImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/defaultImage.png")));
-    private final Image userImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/userImage.png")));
+    private final Image defaultUserImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/userImage.png")));
     //To be added later with the rest of the profile set up
     //private Image userImage = new Image(this.getClass().getResourceAsStream("/images/profileImage.png"));
     /**
@@ -50,10 +51,10 @@ public class MainWindow extends AnchorPane {
                 profileImageView.setImage(image);
             }
             else {
-                profileImageView.setImage(userImage);
+                profileImageView.setImage(defaultUserImage);
             }
         } else {
-            profileImageView.setImage(userImage);
+            profileImageView.setImage(defaultUserImage);
         }
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
@@ -91,6 +92,20 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = platform.getResponse(input);
+        String imagePath = readPath();
+        Image userImage;
+        if (imagePath != null) {
+            File imageFile = new File(imagePath);
+            if (imageFile.exists()) {
+                userImage = new Image(imageFile.toURI().toString());
+            }
+            else {
+                userImage = defaultUserImage;
+            }
+        } else {
+            userImage = defaultUserImage;
+        }
+        scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getPlatformDialog(response,  defaultImage)
