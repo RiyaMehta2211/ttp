@@ -16,14 +16,14 @@ public class Ui {
         return input;
     }
     public static String printHelp() {
-        return "No worries, Buddy! Diversity is here to help :D \n"
+        return "No worries, buddy! Diversity is here to help :D \n"
                 + "Here are the commands for use: \n"
                 + "1. help: shows this list of commands and features\n"
                 + "2.. list: displays the whole dictionary\n"
                 + "3. find <keyword>: returns a new list of tasks containing the matching keyword in the task description\n"
                 + "4. bye: displays a goodbye message. \n" +
                 "Start setting up your profile on the app if you haven't already!" +
-                " Click on the top right corner to begin!";
+                " Click on the profile icon on the top right corner to begin!";
     }
 
     public static String printError() {

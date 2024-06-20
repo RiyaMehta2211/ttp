@@ -46,15 +46,15 @@ run {
 }
 
 application {
-    mainClass.set("duke.Launcher")
+    mainClass.set("InspireInclusion.Launcher")
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "InspireInclusion"
     archiveClassifier = null
     dependsOn("distZip", "distTar")
 
-    archiveFileName = 'HarryPotter.jar'
+    archiveFileName = 'InspireInclusion.jar'
 }
 
 run{
