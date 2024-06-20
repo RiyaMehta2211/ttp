@@ -1,4 +1,4 @@
-# InspireInclusion
+# #InspireInclusion
 A desktop application to drive and measure adoption of inclusive behaviors amongst individuals of organizations.
 #InspireInclusion will deliver personalized content with the aim of driving engagement with the diversity and inclusivity initiatives taken by organizations.
 
