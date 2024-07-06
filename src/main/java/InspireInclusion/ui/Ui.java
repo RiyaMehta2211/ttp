@@ -31,6 +31,7 @@ public class Ui {
                 + "7. stop music: Stops playing music\n"
                 + "8. pause music: Pauses music at the current timeframe \n"
                 + "9. resume music: Resumes music from the current timeframe \n"
+                + "10. change music: Bored of the same music and want to change it? Of course you can! \n"
                 + "10. bye: displays a goodbye message. \n" +
                 "Start setting up your profile on the app if you haven't already!" +
                 " Click on the profile icon on the top right corner to begin!";
@@ -99,5 +100,10 @@ public class Ui {
     public static String resumeSound() {
         Music.resumeMusic();
         return "music resumed";
+    }
+
+    public static String changeSound() {
+        Music.changeMusic();
+        return "music changed";
     }
 }

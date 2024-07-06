@@ -52,6 +52,8 @@ public class Parser {
             return Ui.pauseSound();
         } else if (str.equals("resume music")) {
             return Ui.resumeSound();
+        } else if (str.equals("change music")) {
+            return Ui.changeSound();
         }
         else {
             return Ui.printError();
