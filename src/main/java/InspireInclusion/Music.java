@@ -31,9 +31,11 @@ public class Music {
         } else {
             i = 0;
         }
-        audio.pause();
+        if (audio.getStatus() == MediaPlayer.Status.PLAYING) {
+            audio.pause();
+        }
         audio = new MediaPlayer(
                 new Media(new File(Music.class.getResource(AUDIO_PATHS[i]).getPath()).toURI().toString()));
-        audio.play();
+        playMusic();
     }
 }
