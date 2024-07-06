@@ -28,4 +28,8 @@ public class Dictionary {
         }
         return "Term not found in the dictionary";
     }
+
+    /*public void addTerm(String term) {
+        properties.setProperty(term, "New definition");
+    }*/
 }

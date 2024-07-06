@@ -21,7 +21,16 @@ public class Parser {
             return Ui.printHelp();
         } else if (str.equals("list")) {
             return Ui.printList();
-        } else if (str.startsWith("find ")) {
+        } /*else if (str.startsWith("add ")) {
+            String term = str.substring(4);
+            if (term.trim().isEmpty()) {
+                return Ui.printEmptyInput();
+            }
+            else {
+                return Ui.printTermAdded(term);
+            }
+        }*/
+        else if (str.startsWith("find ")) {
             String term = str.substring(5);
             if (term.trim().isEmpty()) {
                 return Ui.printEmptyInput();
@@ -29,7 +38,20 @@ public class Parser {
             else {
                 return Ui.printDefinition(term);
             }
-        } else {
+        } else if (str.equals("quiz")) {
+            return Ui.printQuizRules();
+        } else if (str.equals("start")) {
+            return Ui.printQuizQuestions();
+        } else if (str.equals("play music")) {
+            return Ui.playSound();
+        } else if (str.equals("stop music")) {
+            return Ui.stopSound();
+        } else if (str.equals("pause music")) {
+            return Ui.pauseSound();
+        } else if (str.equals("resume music")) {
+            return Ui.resumeSound();
+        }
+        else {
             return Ui.printError();
         }
     }
