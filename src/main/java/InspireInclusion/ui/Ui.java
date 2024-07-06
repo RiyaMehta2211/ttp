@@ -42,17 +42,29 @@ public class Ui {
     }
 
     public static String printQuizRules() {
-        return "Sure! Let's go. I will ask 5 timed MCQ Questions on the definition of" +
-                " the dictionary terms. Choose the most appropriate answer by typing 'A','B', 'C', 'D'." +
+        return "Sure! Let's go. I will ask you an MCQ Question Of The Day on the definition of" +
+                " the dictionary terms. Choose the most appropriate answer by typing 'A','B', 'C', 'D'.\n" +
+                "Come back everyday, get the answer right, and maintain a daily streak! \n"+
                 "Type 'start' to begin. Good luck!";
     }
-    public static String printQuizQuestions() {
-        return "";
+    public static String printQuizQuestionOne() {
+        return "Question 1: Which of the following is the definition of PeopleOfColor?\n" +
+                "A. A collective term for men and women of Asian, African, Latinx and Native American backgrounds, as opposed to the collective ?White?. \n" +
+                "B. An umbrella term that can refer to anyone who transgresses society?s view of gender or sexuality. The definitional indeterminacy of the word Queer, its elasticity, is one of its characteristics: ?A zone of possibilities.? \n" +
+                "C. An inclusive term for those who identify as lesbian, gay, bisexual, transgender, queer, intersex, and asexual.\n" +
+                "D. None of the above";
     }
 
     public static String printEmptyInput() {
         return "Sorry, the term cannot be empty. Type 'help' " +
                 "to find out more about the app!";
+    }
+
+    public static String printLoss() {
+        return "Sorry, you did not get it right :(. Try again tomorrow.";
+    }
+    public static String printWin() {
+        return "Yes, you got it right :). Come back tomorrow to continue the streak!.";
     }
 
     public static String printList() {
