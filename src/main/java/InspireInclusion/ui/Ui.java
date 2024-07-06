@@ -1,20 +1,23 @@
 package InspireInclusion.ui;
+import InspireInclusion.Dictionary;
 
 /**
  * The Ui class is responsible for user interaction and displaying messages to the user.
  */
 public class Ui {
+    static Dictionary dict = new Dictionary();
     /**
      * Retrieves and returns a welcome message to be displayed to the user.
      * @return A welcome message to be shown to the user.
      */
     public static String printWelcome() {
         return "Welcome to InspireInclusion! Inspire inclusion and engage communities! \nType " +
-                "help to find out more about my abilities!" ;
+                "'help' to find out more about my abilities!" ;
     }
     public static String printResponse(String input) {
         return input;
     }
+
     public static String printHelp() {
         return "No worries, buddy! Diversity is here to help :D \n"
                 + "Here are the commands for use: \n"
@@ -27,8 +30,21 @@ public class Ui {
     }
 
     public static String printError() {
-        return "Sorry friend, I don't know what this means :( Type help to find out more " +
+        return "Sorry friend, I don't know what this means :( Type 'help' to find out more " +
                 "about the app!";
+    }
+
+    public static String printEmptyInput() {
+        return "Sorry, the term cannot be empty. Type 'help' " +
+                "to find out more about the app!";
+    }
+
+    public static String printList() {
+        return dict.listTerms();
+    }
+
+    public static String printDefinition(String term) {
+        return dict.defineTerm(term);
     }
 
     public static String printBye() {

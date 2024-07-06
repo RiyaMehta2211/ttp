@@ -6,8 +6,8 @@ public class Parser {
     /**
      * Default constructor to initialize the Parser class.
      */
-    public Parser() {}
-
+    public Parser() {
+    }
 
     /**
      * Parses user input and executes .
@@ -19,7 +19,18 @@ public class Parser {
             return Ui.printBye();
         } else if (str.equals("help")) {
             return Ui.printHelp();
-        }
+        } else if (str.equals("list")) {
+            return Ui.printList();
+        } else if (str.startsWith("find ")) {
+            String term = str.substring(5);
+            if (term.trim().isEmpty()) {
+                return Ui.printEmptyInput();
+            }
+            else {
+                return Ui.printDefinition(term);
+            }
+        } else {
             return Ui.printError();
         }
+    }
 }
