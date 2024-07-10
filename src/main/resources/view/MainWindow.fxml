@@ -43,8 +43,11 @@
                 <ImageView fx:id="profileImageView" fitWidth="50" fitHeight="50" preserveRatio="true"/>
             </graphic>
         </Button>
-        <Button fx:id="streaks" contentDisplay="TOP" style="-fx-background-color: blue;" AnchorPane.topAnchor="10"
-                AnchorPane.rightAnchor="10" onAction="#openDailyStreaksPage">
+        <Button fx:id="streaks" contentDisplay="TOP" style="-fx-background-color: transparent;" AnchorPane.topAnchor="5"
+                AnchorPane.rightAnchor="5" onAction="#openDailyStreaksPage">
+            <graphic>
+                <ImageView fx:id="streaksIconView" fitWidth="20" fitHeight="30" preserveRatio="true"/>
+            </graphic>
         </Button>
     </children>
 </AnchorPane>

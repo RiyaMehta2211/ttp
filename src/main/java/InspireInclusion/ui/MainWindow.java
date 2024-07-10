@@ -1,6 +1,7 @@
 package InspireInclusion.ui;
 import InspireInclusion.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -27,16 +28,21 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
     @FXML
     private Button streaks;
-
     @FXML
     private Button profile;
     @FXML
     private ImageView profileImageView;
+    @FXML
+    private ImageView streaksIconView;
+    private File chosenFile;
+    private final Image calendarIcon = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/defaultImage.png")));
 
     private Platform platform;
     private final Image defaultImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/defaultImage.png")));
     private final Image defaultUserImage = new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/userImage.png")));
+    private final Image dailyStreaksIcon= new Image(Objects.requireNonNull(this.getClass().getResourceAsStream("/images/DailyStreaksIcon.png")));
     /**
+     *
      * Initializes the JavaFX controller when the associated FXML file is loaded.
      * This method sets up the scroll pane and adds the initial dialog to the dialog container.
      */
@@ -55,6 +61,7 @@ public class MainWindow extends AnchorPane {
         } else {
             profileImageView.setImage(defaultUserImage);
         }
+        streaksIconView.setImage(dailyStreaksIcon);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getPlatformDialog(Ui.printWelcome(), defaultImage)

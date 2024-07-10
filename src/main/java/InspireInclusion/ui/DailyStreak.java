@@ -102,9 +102,9 @@ public class DailyStreak extends AnchorPane{
         score.setPrefWidth(150.0);
         score.setPrefHeight(150.0);
         score.setContentDisplay(ContentDisplay.CENTER);
-        score.setStyle("-fx-background-radius: 150.0; -fx-background-color: #FFBF00; -fx-border-radius: 150.0; -fx-padding: 42px;");
+        score.setStyle("-fx-background-radius: 150.0; -fx-background-color: #FFBF00; -fx-border-radius: 150.0; -fx-padding: 35px;");
         score.setTextFill(Color.BLACK);
-        score.setFont(Font.font("Times New Roman Bold", 12));
+        score.setFont(Font.font("Times New Roman Bold", 15));
 
         stackPane.getChildren().add(score);
         scrollPane.setContent(stackPane);
