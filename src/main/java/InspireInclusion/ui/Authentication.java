@@ -24,14 +24,12 @@ public class Authentication {
     //Change default strings later to use a
     //hashmap data structure to map the usernames to passwords
     private static HashMap<String, String> userCredentials = new HashMap<>();
-    private static final String DEFAULT_USERNAME = "admin";
-    private static final String DEFAULT_PASSWORD = "12345678";
     public static boolean authentication_status;
     static {
         try {
             userCredentials = Storage.loadCredentials();
         } catch (IOException | ClassNotFoundException e) {
-            userCredentials.put(DEFAULT_USERNAME, DEFAULT_PASSWORD);
+            e.getMessage();
         }
     }
 
