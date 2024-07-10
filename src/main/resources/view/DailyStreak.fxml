@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0"
+            xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="InspireInclusion.ui.DailyStreak" style="-fx-background-color: black">
+    <children>
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" vbarPolicy="NEVER" prefHeight="600.0" prefWidth="400.0"
+                    vvalue="1.0" styleClass="scrollPane" stylesheets="@DailyStreak.css">
+            <content>
+                <StackPane prefWidth="400.0" prefHeight="600.0">
+                    <Label fx:id="score" contentDisplay="CENTER" prefHeight="150.0" prefWidth="150.0"
+                           style="-fx-background-radius: 150.0; -fx-background-color: #FFBF00; -fx-border-radius: 150.0;
+                           -fx-padding: 42px" textFill="black">
+                        <font>
+                            <Font name="Times New Roman Bold" size="12"/>
+                        </font>
+                    </Label>
+                </StackPane>
+            </content>
+        </ScrollPane>
+    </children>
+</AnchorPane>

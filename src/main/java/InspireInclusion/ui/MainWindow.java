@@ -25,6 +25,8 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private Button streaks;
 
     @FXML
     private Button profile;
@@ -72,6 +74,17 @@ public class MainWindow extends AnchorPane {
     public void setPlatform(Platform p) {
         platform = p;
     }
+    @FXML
+    private void openDailyStreaksPage() {
+        try {
+            Stage dailyStreaksStage = new Stage();
+            DailyStreak dailyStreakPage = new DailyStreak();
+            dailyStreakPage.start(dailyStreaksStage);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @FXML
     private void openProfilePage() {
         try {

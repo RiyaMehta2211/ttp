@@ -1,8 +1,7 @@
 package InspireInclusion;
 
+import InspireInclusion.ui.DailyStreak;
 import InspireInclusion.ui.Ui;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Parser {
 
@@ -11,15 +10,21 @@ public class Parser {
      */
     public Parser() {
     }
-    static Timer timer = new Timer();
     /**
      * Parses user input and executes .
      *
      * @param str The user input string.
      */
     static boolean question_asked = false;
+    static DailyStreak dailyStreak = new DailyStreak();
     public static String chat(String str) {
+        if (str.equals("A") && question_asked && !DailyStreak.quizAnsweredToday) {
+            dailyStreak.updateStreakStatus();
+            //System.out.println("xpscore: " + DailyStreak.xpScore);
+            return Ui.printWin();
+        }
         if (str.equals("A") && question_asked) {
+            //System.out.println("xpscore: " + DailyStreak.xpScore);
             return Ui.printWin();
         }
         if ((str.equals("B") || str.equals("C") || str.equals("D")) && question_asked) {

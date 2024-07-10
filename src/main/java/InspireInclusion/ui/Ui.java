@@ -34,7 +34,8 @@ public class Ui {
                 + "10. change music: Bored of the same music and want to change it? Of course you can! \n"
                 + "10. bye: displays a goodbye message. \n" +
                 "Start setting up your profile on the app if you haven't already!" +
-                " Click on the profile icon on the top right corner to begin!";
+                " Click on the profile icon on the top right corner to begin!\n" +
+                "Also attempt quiz answers correctly every day to keep the streak going!";
     }
 
     public static String printError() {

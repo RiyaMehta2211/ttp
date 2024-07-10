@@ -1,10 +1,11 @@
-/*.scrollPane .viewport{
-    /*-fx-background-image: url("https://images.photowall.com/products/60854/colorful-abstract-painting.jpg?h=699&q=85");
-    -fx-background-size: 100% 100%;
-    -fx-background-repeat: no-repeat;*/
-.scrollPane .viewport {
+.scrollPane .viewport{
     -fx-background-image: url("https://images.photowall.com/products/60854/colorful-abstract-painting.jpg?h=699&q=85");
-    -fx-background-size: cover; /* Ensures the image covers the entire viewport */
-    -fx-background-position: center; /* Centers the image within the viewport */
+    -fx-background-size: 100% 100%;
     -fx-background-repeat: no-repeat;
 }
+/*.scrollPane .viewport {
+    -fx-background-image: url("https://images.photowall.com/products/60854/colorful-abstract-painting.jpg?h=699&q=85");
+    -fx-background-size: cover; /* Ensures the image covers the entire viewport */
+    /*-fx-background-position: center; Centers the image within the viewport */
+    /*-fx-background-repeat: no-repeat;
+}*/
